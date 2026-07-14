@@ -12,9 +12,9 @@ import bookingRouter from './routes/bookingRoutes.js';
 
 const app = express();
 const port = process.env.PORT || 3000;
-const frontendUrl = 'https://eventify-frontend-hyvw.onrender.com' || 'http://localhost:5173';
-
-// Create HTTP Server
+const frontendUrl = process.env.NODE_ENV === 'production'
+  ? 'https://eventify-frontend-hyvw.onrender.com'
+  : 'http://localhost:5173';
 const server = createServer(app);
 const io = new Server(server, {
   cors: { origin: [frontendUrl], credentials: true }
